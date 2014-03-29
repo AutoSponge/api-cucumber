@@ -1,6 +1,6 @@
-/*globals _push, replace_, slice_, take_, trim, leave, pluck, request, processResponse, ok, eq */
+/*globals _push, trim, leave, pluck, request, processResponse, ok, eq */
 module.exports = function () {
-
+    'use strict';
     this.World = require( '../support/world.js' ).World;
 
     this.Given( /^I call the API$/, function ( table, callback ) {

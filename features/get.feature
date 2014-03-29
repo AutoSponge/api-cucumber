@@ -13,6 +13,6 @@ Background:
     And the response body is <body>
 
   Examples:
-    | path                                         | code | body                            |
-    | /AutoSponge/api-cucumber/master//test_data/1 | 200  | {"id": 1,"message": "success"}  |
-    | /AutoSponge/api-cucumber/master//test_data/2 | 404  | Not Found                       |
+    | path                                        | code | body                            |
+    | /AutoSponge/api-cucumber/master/test_data/1 | 200  | {"id": 1,"message": "success"}  |
+    | /AutoSponge/api-cucumber/master/test_data/2 | 404  | Not Found                       |
