@@ -1,6 +1,6 @@
-Feature: Search trials
-  As an authenticated and authorized user
-  I can search trial information
+Feature: GET requests return available resources
+  As an unauthenticated user
+  I can request resources
 
 Background:
   Given I call the API
