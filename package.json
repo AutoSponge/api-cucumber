@@ -1,0 +1,11 @@
+{
+    "devDependencies": {
+        "cucumber": "latest",
+        "es6-promise": "^0.1.1",
+        "json-schema": "^0.2.2",
+        "part": "^0.1.1"
+    },
+    "scripts": {
+        "test": "cucumber.js ./features/**/*.feature"
+    }
+}
