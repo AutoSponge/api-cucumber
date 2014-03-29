@@ -2,6 +2,7 @@
 exports.World = function World( callback ) {
 
     this.selectedEnvironment = 'DEV';
+    this.responses = [];
 
     callback( this );
 
@@ -63,6 +64,7 @@ global.ok = function ( expression, msg ) {
 };
 global.eq = function ( expected ) {
     return function ( actual ) {
+        console.log( expected, actual, typeof expected, typeof actual );
         return expected === actual;
     };
 };

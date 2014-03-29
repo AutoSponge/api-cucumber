@@ -1,16 +1,4 @@
-/*globals
-_push,
-replace_,
-slice_,
-take_,
-trim,
-leave,
-pluck,
-request,
-processResponse,
-ok,
-eq
-*/
+/*globals _push, replace_, slice_, take_, trim, leave, pluck, request, processResponse, ok, eq */
 module.exports = function () {
 
     this.World = require( '../support/world.js' ).World;
@@ -24,7 +12,7 @@ module.exports = function () {
         callback();
     } );
 
-    this.When( /^I send a (GET|HEAD) request as (.*?) to (.*?)$/, function ( method, user, path, callback ) {
+    this.When( /^I send a (.*?) request to (.*?)$/, function ( method, path, callback ) {
         var environment = this.environment[this.selectedEnvironment].split( '://' );
         return request( {
             hostname: environment[1],
@@ -47,7 +35,7 @@ module.exports = function () {
             .catch( callback.fail );
     } );
 
-    this.Then( /^the response body is "([^"]*)"$/, function ( body, callback ) {
+    this.Then( /^the response body is (.*?)$/, function ( body, callback ) {
         ok( this.responses
                 .map( pluck( 'body' ) )
                 .map( trim )

@@ -4,15 +4,15 @@ Feature: Search trials
 
 Background:
   Given I call the API
-    | environment | baseURL                 |
-    | DEV         | https://api.github.com/ |
+    | environment | baseURL                           |
+    | DEV         | https://raw.githubusercontent.com |
 
   Scenario Outline:  'search' rules message
-    When I send a GET request to
-    Then the response code is 200
-    And the response body starts with "Search criteria rules include"
+    When I send a GET request to <path>
+    Then the response code is <code>
+    And the response body is <body>
 
   Examples:
-    | query  |
-    |        |
-    | ?foo=1 |
+    | path                                         | code | body                            |
+    | /AutoSponge/api-cucumber/master//test_data/1 | 200  | {"id": 1,"message": "success"}  |
+    | /AutoSponge/api-cucumber/master//test_data/2 | 404  | Not Found                       |
