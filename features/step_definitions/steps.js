@@ -1,8 +1,13 @@
 /*globals _push, trim, leave, pluck, request, processResponse, ok, eq */
 module.exports = function () {
     'use strict';
+
+    // standard boilerplate including the World constructor
     this.World = require( '../support/world.js' ).World;
 
+    // processes the Background section
+    // this will cache the API table to the world instance
+    // this runs at the beginning of every scenario
     this.Given( /^I call the API$/, function ( table, callback ) {
         var world = this;
         world.environment = world.environment || {};
@@ -12,6 +17,8 @@ module.exports = function () {
         callback();
     } );
 
+    // a fairly generic request step which you can extend to
+    // include authentication or to make multiple requests with different data
     this.When( /^I send a (.*?) request to (.*?)$/, function ( method, path, callback ) {
         var environment = this.environment[this.selectedEnvironment].split( '://' );
         return request( {
@@ -21,10 +28,13 @@ module.exports = function () {
         }, '', eq( 'https' )( environment[0] ) )
             .then( processResponse )
             .then( _push( this.responses ) )
+            // leave( 0 ) acts as a guard.  if you don't guard the callback
+            // the value of the previously resolved promise will cause the test to fail
             .then( leave( 0 )( callback ) )
             .catch( callback.fail );
     } );
 
+    // a generic status code step
     this.Then( /^the response code is (\d+)$/, function ( statusCode, callback ) {
         ok( this.responses
                 .map( pluck( 'statusCode' ) )
@@ -35,6 +45,9 @@ module.exports = function () {
             .catch( callback.fail );
     } );
 
+    // a generic response body step
+    // this allows us to check both string responses and and
+    // structured responses because our request function does not parse
     this.Then( /^the response body is (.*?)$/, function ( body, callback ) {
         ok( this.responses
                 .map( pluck( 'body' ) )
